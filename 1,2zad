@@ -1,0 +1,75 @@
+''' Zadane 1 '''
+
+import random
+cnt1 = 0
+cnt0 = 0
+secnt = 1
+
+l = [random.randint(0, 1) for i in range(16)]
+print(l)
+for i in l:
+    if i == 1:
+        cnt1 += 1
+    else:
+        cnt0 += 1
+v = []
+d = []
+c = 1
+v.append(l[0])
+for i in range(1, len(l)):
+    if l[i] == l[i-1]:
+        c += 1
+    else:
+        d.append(c)
+        c = 1
+        v.append(l[i])
+d.append(c)
+for i in range(len(v)):
+    print(v[i], " - ", d[i], sep="")
+print(cnt1,cnt0)
+def percentage(x, y):
+    if not x and not y:
+        print("x = 0%\ny = 0%")
+    else:
+        fin = 100/ (x + y)
+        x = x * fin
+        y = y * fin
+        print('Нули = {}%\nЕдиницы = {}%'.format(x,y))
+percentage(cnt1,cnt0)
+
+''' Zadanie 2 '''
+
+from collections import Counter
+import numpy as np
+
+n = int(input('введи количество точек '))
+t = np.random.rand(n, 2)
+print(t)
+sumx = sum(t[i][0] for i in range(n))
+sumy = sum(t[i][1] for i in range(n))
+print(sumx, sumy)
+sumxy = sum([t[i][0] * t[i][1] for i in range(n)])
+sumx2 = sum([t[i][0] ** 2 for i in range(n)])
+print(sumxy, sumx2)
+a = (n * sumxy - sumx * sumy) / (n * sumx2 - sumx ** 2)
+b = (sumx2 * sumy - sumx * sumxy) / (n * sumx2 - sumx ** 2)
+x = np.linspace(0, 10, 100)
+y = a * x + b
+p.title('МНК')
+p.xlabel('x')
+p.ylabel('y')
+p.grid()
+p.plot(x, y)
+p.show()
+
+n = int(input('введи количество значений '))
+c = np.random.rand(n)
+k = len(c)
+v = Counter(c)
+mato = sum(i * (v[i] / k) for i in v)
+mato2 = sum((i * (v[i] / k)) ** 2 for i in v)
+
+disp = mato2 - mato ** 2
+sr = disp ** 0.5
+print(sr)
+
